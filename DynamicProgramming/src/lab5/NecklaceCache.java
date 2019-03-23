@@ -1,12 +1,14 @@
 package lab5;
 
+import java.util.ArrayList;
+
 public class NecklaceCache extends DynamicProgrammingCache {
 	
-	private Necklace necklace;
+	private String representation;
 	
-	public NecklaceCache(String[] labels, int[] values, int[] weights, int max, Necklace necklace) {
+	public NecklaceCache(String[] labels, int[] values, int[] weights, int max, String representation) {
 		super(labels, values, weights, max);
-		this.necklace = necklace;
+		this.representation = representation;
 	}
 
 	@Override
@@ -26,20 +28,61 @@ public class NecklaceCache extends DynamicProgrammingCache {
 	}
 
 	private boolean checkSubstring(int j, String string) {
-		String subNecklace = necklace.getSubstring(j + 1);
-		return subNecklace.contains(subNecklace);
+		int backtrackLimit = string.length();
+		if(backtrackLimit > j)
+			return false;
+		String subNecklace = representation.substring(j - backtrackLimit, j);
+		return subNecklace.contains(string);
 	}
 
 	@Override
 	protected int defaultValueForCell(int i, int j) {
 		if(j == 0)
 			return 0;
-		return cache[i][j - 1];
+		if(i == 0)
+			return cache[cache.length - 1][j - 1];
+		return cache[i - 1][j];
 	}
 
 	@Override
 	public String[] getBestElements() {
-		return null;
+		ArrayList<String> res = new ArrayList<>();
+		int starti = cache.length - 1;
+		int startj = cache[starti].length - 1;
+		
+		boolean changedValue = false;
+		int lastAddedLength = 0;
+		int lastJ = startj;
+		for(int j = startj; j >= 0; j--) {
+			for(int i = starti; i >= 0; i--) {
+				
+				if(lastJ - lastAddedLength < 0)
+					break;
+				
+				if(i == 0) {
+					if(j != 0) {
+						changedValue = checkNumbers(cache[i][j], cache[cache.length - 1][j - 1]);
+					}
+					else
+						break;
+				}
+				else {
+					changedValue = checkNumbers(cache[i][j], cache[i - 1][j]);
+				}
+				
+				if(changedValue && lastJ - lastAddedLength >= j) {
+					res.add(objectLabels[i]);
+					lastAddedLength = objectLabels[i].length();
+					lastJ = j;
+				}
+			}
+		}
+		String[] resActual = new String[res.size()];
+		return res.toArray(resActual);
+	}
+
+	private boolean checkNumbers(int n1, int n2) {
+		return n1 != n2;
 	}
 
 }
