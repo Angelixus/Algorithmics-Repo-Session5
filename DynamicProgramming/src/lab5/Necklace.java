@@ -15,6 +15,7 @@ public class Necklace {
 	}
 	
 	public int appraisal() {
+		cache.updateTable();
 		return cache.getMaxValue();
 	}
 	public String[] getBestElements() {

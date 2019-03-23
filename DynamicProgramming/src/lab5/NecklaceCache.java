@@ -1,6 +1,7 @@
 package lab5;
 
 import java.util.ArrayList;
+import java.util.List;
 
 public class NecklaceCache extends DynamicProgrammingCache {
 	
@@ -46,7 +47,7 @@ public class NecklaceCache extends DynamicProgrammingCache {
 
 	@Override
 	public String[] getBestElements() {
-		ArrayList<String> res = new ArrayList<>();
+		List<String> res = new ArrayList<>();
 		int starti = cache.length - 1;
 		int startj = cache[starti].length - 1;
 		
