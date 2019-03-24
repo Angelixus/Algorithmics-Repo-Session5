@@ -16,24 +16,24 @@ public class NecklaceFactory {
 	}
 	
 
-	public static Necklace createTwoPiecesNecklace(int length){
+	public static String createTwoPiecesNecklace(int length){
 		//Diamond, Ruby
-		return new Necklace(randomNecklace(new String[] { "D", "R" }, length));
+		return randomNecklace(new String[] { "D", "R" }, length);
 	}
 	
-	public static Necklace createThreePiecesNecklace(int length){
+	public static String createThreePiecesNecklace(int length){
 		//Diamond, Ruby, Emerald
-		return new Necklace(randomNecklace(new String[] { "D", "R", "E" }, length));
+		return randomNecklace(new String[] { "D", "R", "E" }, length);
 	}
 	
-	public static Necklace createFourPiecesNecklace(int length){
+	public static String createFourPiecesNecklace(int length){
 		//Diamond, Ruby, Emerald, Sapphire
-		return new Necklace(randomNecklace(new String[] { "D", "R", "E", "S" }, length));
+		return randomNecklace(new String[] { "D", "R", "E", "S" }, length);
 	}
 	
-	public static Necklace createFiveNecklace(int length){
+	public static String createFiveNecklace(int length){
 		//Diamond, Ruby, Emerald, Sapphire, Topaz
-		return new Necklace(randomNecklace(new String[] { "D", "R", "E", "S", "T" }, length));
+		return randomNecklace(new String[] { "D", "R", "E", "S", "T" }, length);
 	}
 	
 	public static HashMap<String, Integer> getSimpleValuesTable(){

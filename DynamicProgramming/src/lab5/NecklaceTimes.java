@@ -4,7 +4,6 @@ import lab5.NecklaceAlgorithm.SelectedValue;
 public class NecklaceTimes {
 
 	public static void main(String[] args) {
-
 		SelectedValue[] ways = SelectedValue.values();
 		for (int i1 = 0; i1 < ways.length; i1++) {
 			SelectedValue choose = ways[i1];
@@ -15,7 +14,7 @@ public class NecklaceTimes {
 					System.out.println("Times for a necklace with: " + Integer.parseInt(args[type]) + " pieces");
 					System.out.println();
 					for (int i = 10000; i < Integer.MAX_VALUE; i *= 2) {
-						Necklace necklace = null;
+						String necklace = null;
 						if (Integer.parseInt(args[type]) == 2)
 							necklace = NecklaceFactory.createTwoPiecesNecklace(i);
 						else if (Integer.parseInt(args[type]) == 3)
@@ -28,7 +27,7 @@ public class NecklaceTimes {
 						NecklaceAlgorithm algorithm = new NecklaceAlgorithm(necklace);
 
 						long start = System.currentTimeMillis();
-						algorithm.run(choose);
+						algorithm.runNoPrint(choose);
 						long end = System.currentTimeMillis();
 
 						long elapsed = end - start;
